@@ -1,0 +1,50 @@
+
+spring:
+  application:
+    name: auth
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+#        namespace: dev
+        server-addr: 127.0.0.1:8848
+      config:
+        # 配置文件的格式 默认为 PROPERTIES。
+        file-extension: yaml
+        # 配置中心的地址
+        server-addr: 127.0.0.1:8848
+        # 配置文件prefix
+        prefix: ${spring.application.name}
+        # 使用的 Nacos 配置分组，默认为 DEFAULT_GROUP。
+        group: public
+        # 使用的 Nacos 的命名空间，默认为 null。
+        namespace:
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/nacos_test?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+logging:
+  level:
+    root: INFO
+    com:
+      alibaba:
+        nacos:
+          client:
+            naming: error
+    sun:
+      rmi:
+        loader: error
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.hongcj.auth.model
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+    # 该配置就是将带有下划线的表字段映射为驼峰格式的实体类属性
+    map-underscore-to-camel-case: true

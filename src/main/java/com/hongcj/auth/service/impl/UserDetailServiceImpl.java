@@ -35,7 +35,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 //		return new UserDetailsImpl(new User("admin",passwordEncoder.encode("123456")));
 		LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.ge(User::getUsername,username);
+		queryWrapper.eq(User::getUsername,username);
 		User user = userService.getOne(queryWrapper);
 		if(user == null){
 			throw new RuntimeException("用户不存在");
